@@ -1,0 +1,18 @@
+# Key & file sinh ra từ key — KHÔNG được commit
+.env
+key.txt
+src/key.js
+
+# File tự sinh / build
+src/assets.js
+demo.zip
+
+# Vercel
+.vercel
+src/.vercel
+
+# Hệ điều hành / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+node_modules/

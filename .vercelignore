@@ -1,0 +1,10 @@
+# Chỉ deploy trang web: index.html + JS trong src/.
+# Mọi thứ khác (.env, key.txt, samples/, assets/, IDEA) KHÔNG được đưa lên Vercel.
+/*
+!index.html
+!src
+src/build-assets.mjs
+src/README.md
+src/.vercel
+src/.vercelignore
+src/.gitignore
