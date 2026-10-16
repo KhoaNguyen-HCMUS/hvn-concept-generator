@@ -62,3 +62,14 @@ if (key) {
   fs.writeFileSync(path.join(dir, "key.js"), `// Tự sinh từ .env — CHỈ DÙNG LOCAL, không commit file này\nconst OPENROUTER_API_KEY = ${JSON.stringify(key)};\n`);
 }
 console.log("OK: assets.js", (fs.statSync(path.join(dir, "assets.js")).size / 1e6).toFixed(1) + " MB", key ? "+ key.js" : "(chưa có OPENROUTER_API_KEY trong .env — copy .env.example thành .env rồi điền key)");
+
+// --dist: gom đúng các file trang web cần vào dist/ (dùng khi deploy Vercel: Output Directory = dist)
+if (process.argv.includes("--dist")) {
+  if (!key) { console.error("LỖI: thiếu OPENROUTER_API_KEY (đặt trong Environment Variables của Vercel)"); process.exit(1); }
+  const dist = path.join(ROOT, "dist");
+  fs.rmSync(dist, { recursive: true, force: true });
+  fs.mkdirSync(path.join(dist, "src"), { recursive: true });
+  fs.copyFileSync(path.join(ROOT, "index.html"), path.join(dist, "index.html"));
+  for (const f of ["app.js", "catalog.js", "prompts.js", "assets.js", "key.js"]) fs.copyFileSync(path.join(dir, f), path.join(dist, "src", f));
+  console.log("OK: dist/ (index.html + src/*.js)");
+}
