@@ -5,6 +5,7 @@ src/key.js
 
 # File tự sinh / build
 src/assets.js
+dist/
 demo.zip
 
 # Vercel
